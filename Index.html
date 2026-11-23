@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#14252d">
+  <title>Work Day Tracker</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<main class="app">
+  <header class="topbar">
+    <div>
+      <h1 id="title">Work Day Tracker</h1>
+      <p id="subtitle" class="muted"></p>
+    </div>
+    <div class="top-actions">
+      <select id="language" aria-label="Language"></select>
+      <button id="settingsBtn" class="icon-btn" aria-label="Settings">⚙</button>
+    </div>
+  </header>
+
+  <section class="stats" aria-label="Monthly summary">
+    <div class="stat"><strong id="workedCount">0</strong><span data-t="worked"></span></div>
+    <div class="stat"><strong id="halfCount">0</strong><span data-t="half"></span></div>
+    <div class="stat"><strong id="offCount">0</strong><span data-t="off"></span></div>
+    <div class="stat"><strong id="hoursCount">0</strong><span data-t="hours"></span></div>
+    <div class="stat earnings"><strong id="earnings">₹0</strong><span data-t="monthEarnings"></span></div>
+  </section>
+
+  <nav class="month-nav">
+    <button id="prevMonth" aria-label="Previous month">‹</button>
+    <strong id="monthLabel"></strong>
+    <button id="nextMonth" aria-label="Next month">›</button>
+  </nav>
+
+  <section class="calendar" id="calendar" aria-label="Calendar"></section>
+
+  <div class="legend">
+    <span><i class="worked-dot"></i><span data-t="worked"></span></span>
+    <span><i class="half-dot"></i><span data-t="half"></span></span>
+    <span><i class="off-dot"></i><span data-t="off"></span></span>
+    <span class="muted" data-t="weeklyOff"></span>
+  </div>
+
+  <button class="primary full" id="todayBtn" data-t="markToday"></button>
+</main>
+
+<div class="overlay" id="dayDialog" hidden>
+  <section class="sheet" role="dialog" aria-modal="true" aria-labelledby="dayTitle">
+    <h2 id="dayTitle"></h2>
+
+    <div class="status-options">
+      <button data-status="w" data-t="worked"></button>
+      <button data-status="h" data-t="half"></button>
+      <button data-status="o" data-t="off"></button>
+    </div>
+
+    <div id="shiftPickerWrap">
+      <label data-t="chooseShift"></label>
+      <div id="shiftPicker" class="shift-options"></div>
+    </div>
+
+    <label for="hoursInput" data-t="hoursWorked"></label>
+    <input id="hoursInput" type="number" min="0" max="48" step="0.5" inputmode="decimal" placeholder="8">
+
+    <p class="estimate" id="dayEstimate"></p>
+
+    <label for="noteInput" data-t="note"></label>
+    <textarea id="noteInput" rows="3" placeholder=""></textarea>
+
+    <div class="dialog-actions">
+      <button id="clearDay" data-t="clear"></button>
+      <button id="cancelDay" data-t="cancel"></button>
+      <button class="primary" id="saveDay" data-t="save"></button>
+    </div>
+  </section>
+</div>
+
+<div class="overlay" id="settingsDialog" hidden>
+  <section class="sheet" role="dialog" aria-modal="true" aria-labelledby="settingsTitle">
+    <h2 id="settingsTitle" data-t="settings"></h2>
+
+    <label for="nameInput" data-t="yourName"></label>
+    <input id="nameInput" autocomplete="name">
+
+    <label for="workInput" data-t="workType"></label>
+    <input id="workInput">
+
+    <label data-t="payMode"></label>
+    <div class="pay-options">
+      <button data-pay="hour" data-t="perHour"></button>
+      <button data-pay="shift" data-t="perShift"></button>
+    </div>
+
+    <div id="hourlyRateWrap">
+      <label for="rateInput" data-t="ratePerHour"></label>
+      <input id="rateInput" type="number" min="0" inputmode="decimal">
+    </div>
+
+    <div id="shiftSettings">
+      <label data-t="shiftTypes"></label>
+      <div class="shift-options" id="shiftToggle"></div>
+      <div id="shiftRows"></div>
+    </div>
+
+    <label data-t="workingDays"></label>
+    <div class="weekday-options" id="weekdayOptions"></div>
+
+    <label class="checkbox-row">
+      <input id="alarmEnabled" type="checkbox">
+      <span data-t="alarmAtStart"></span>
+    </label>
+
+    <p class="muted small" data-t="alarmNote"></p>
+
+    <div class="dialog-actions">
+      <button id="cancelSettings" data-t="cancel"></button>
+      <button class="primary" id="saveSettings" data-t="save"></button>
+    </div>
+  </section>
+</div>
+
+<div class="toast" id="toast" hidden></div>
+
+<script src="script.js"></script>
+</body>
+</html>
